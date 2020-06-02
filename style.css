@@ -1,0 +1,53 @@
+* {
+  font-family: "Courier Prime", monospace;
+}
+#container {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  background-image: url("img/background.png");
+  background-size: 50px, 50px;
+  background-repeat: repeat;
+}
+#square {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 160px;
+  right: 160px;
+  background-color: red;
+}
+
+.flex {
+  width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.moveButton {
+  margin: 10px 0;
+  padding: 15px;
+  background-color: #138496;
+  border: none;
+  outline: none;
+  color: #fff;
+  border-radius: 7px;
+}
+
+.success {
+  color: green;
+}
+
+.danger {
+  color: red;
+}
+
+.log {
+  text-align: center;
+}
