@@ -21,8 +21,8 @@ class Move {
       this.all[1] = parseFloat(this.all[1]) - 50
       this.all = (this.all.join("px ") + "px").split(" ")
       $(`#${this.elementName}`).css("right", this.all[1])
-      this.showAlert("Kutu <b>sağa</b> ilerletildi.", "success")
-    } else this.showAlert("Kutunun dışına çıkılamaz!", "danger")
+      this.showAlert("Square has moved to <b>right</b>", "success")
+    } else this.showAlert("You can't move out of the box!", "danger")
   }
 
   moveLeft() {
@@ -31,8 +31,8 @@ class Move {
       this.all[1] = parseFloat(this.all[1]) + 50
       this.all = (this.all.join("px ") + "px").split(" ")
       $(`#${this.elementName}`).css("right", this.all[1])
-      this.showAlert("Kutu <b>sola</b> ilerletildi.", "success")
-    } else this.showAlert("Kutunun dışına çıkılamaz!", "danger")
+      this.showAlert("Square has moved to <b>left</b>", "success")
+    } else this.showAlert("You can't move out of the box!", "danger")
   }
 
   moveUp() {
@@ -41,8 +41,8 @@ class Move {
       this.all[0] = parseFloat(this.all[0]) - 50
       this.all = this.all.join("px ").split(" ")
       $(`#${this.elementName}`).css("top", this.all[0])
-      this.showAlert("Kutu <b>yukarı</b> ilerletildi.", "success")
-    } else this.showAlert("Kutunun dışına çıkılamaz!", "danger")
+      this.showAlert("Square has moved to <b>up</b>", "success")
+    } else this.showAlert("You can't move out of the box!", "danger")
   }
 
   moveDown() {
@@ -51,8 +51,8 @@ class Move {
       this.all[0] = parseFloat(this.all[0]) + 50
       this.all = this.all.join("px ").split(" ")
       $(`#${this.elementName}`).css("top", this.all[0])
-      this.showAlert("Kutu <b>aşağı</b> ilerletildi.", "success")
-    } else this.showAlert("Kutunun dışına çıkılamaz!", "danger")
+      this.showAlert("Square has moved to <b><down/b>", "success")
+    } else this.showAlert("You can't move out of the box!", "danger")
   }
 
   showAlert(message, className) {
