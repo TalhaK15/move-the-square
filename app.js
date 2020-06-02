@@ -51,7 +51,7 @@ class Move {
       this.all[0] = parseFloat(this.all[0]) + 50
       this.all = this.all.join("px ").split(" ")
       $(`#${this.elementName}`).css("top", this.all[0])
-      this.showAlert("Square has moved to <b><down/b>", "success")
+      this.showAlert("Square has moved to <b>down/b>", "success")
     } else this.showAlert("You can't move out of the box!", "danger")
   }
 
