@@ -191,15 +191,15 @@ let square = new Move("square")
 let runButtonShort = document.querySelector(".runShort")
 let runButtonLong = document.querySelector(".runLong")
 
-runButtonShort.addEventListener("click", function () {
+function runShort() {
   square.runTheCode("short")
   square = new Move("square")
-})
+}
 
-runButtonLong.addEventListener("click", function () {
+function runLong() {
   square.runTheCode("long")
   square = new Move("square")
-})
+}
 
 /* $(document).ready(function () {
   $(".run").click(function () {
