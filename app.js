@@ -1,17 +1,18 @@
 class Move {
   constructor(elementName) {
     this.elementName = elementName
-    this.top = $(`#${elementName}`).css("top")
-    this.right = $(`#${elementName}`).css("right")
+    this.top = $(`#${this.elementName}`).css("top")
+    this.right = $(`#${this.elementName}`).css("right")
     this.all
     this.rgt = 0
     this.btm = 0
     this.placedMoves
+    this.array = []
   }
 
   makeNumber() {
-    let array = [this.top, this.right]
-    this.all = array
+    this.array = [this.top, this.right]
+    this.all = this.array
       .join("px")
       .split("px")
       .filter((arr) => arr != "")
@@ -150,18 +151,22 @@ class Move {
       console.log(this.rgt, this.btm)
       this.moveInX()
       this.moveInY()
-      this.clearMoves()
+      this.updatePos()
     } else if (type == "long") {
       console.log("long")
       for (let placedMove of this.placedMoves) {
         if (placedMove.classList[1] == "up") {
           this.moveUp("long")
+          this.updatePos()
         } else if (placedMove.classList[1] == "right") {
           this.moveRight("long")
+          this.updatePos()
         } else if (placedMove.classList[1] == "down") {
           this.moveDown("long")
+          this.updatePos()
         } else if (placedMove.classList[1] == "left") {
           this.moveLeft("long")
+          this.updatePos()
         }
       }
     }
@@ -169,9 +174,13 @@ class Move {
 
   clearLog() {}
 
-  clearMoves() {
+  updatePos() {
+    this.top = $(`#${this.elementName}`).css("top")
+    this.right = $(`#${this.elementName}`).css("right")
+    this.all
     this.rgt = 0
     this.btm = 0
+    this.array = []
   }
 }
 
@@ -181,12 +190,10 @@ let runButtonLong = document.querySelector(".runLong")
 
 function runShort() {
   square.runTheCode("short")
-  square = new Move("square")
 }
 
 function runLong() {
   square.runTheCode("long")
-  square = new Move("square")
 }
 
 /* $(document).ready(function () {
@@ -215,6 +222,7 @@ function runLong() {
 // Drag n Drop
 const moves = document.querySelectorAll(".moveButton")
 const places = document.querySelectorAll(".movePlace")
+const homes = document.querySelectorAll(".moveHome")
 let selectedMove = null
 
 //Loop Through Move Buttons
@@ -228,6 +236,13 @@ for (let move of moves) {
     place.addEventListener("dragover", dragOver)
     place.addEventListener("dragleave", dragLeave)
     place.addEventListener("drop", dragDrop)
+  }
+  //Loop Through Homes
+  for (let home of homes) {
+    home.addEventListener("dragenter", dragEnterH)
+    home.addEventListener("dragover", dragOverH)
+    home.addEventListener("dragleave", dragLeaveH)
+    home.addEventListener("drop", dragDropH)
   }
 }
 
@@ -262,5 +277,19 @@ function dragLeave() {
 
 function dragDrop() {
   this.classList.remove("hovered")
+  this.append(selectedMove)
+}
+//---------------------------------------
+function dragOverH(e) {
+  e.preventDefault()
+}
+
+function dragEnterH(e) {
+  e.preventDefault()
+}
+
+function dragLeaveH() {}
+
+function dragDropH() {
   this.append(selectedMove)
 }
