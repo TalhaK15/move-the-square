@@ -153,7 +153,7 @@ class Move {
       this.clearMoves()
     } else if (type == "long") {
       console.log("long")
-      this.placedMoves.forEach((placedMove) => {
+      for (let placedMove of this.placedMoves) {
         if (placedMove.classList[1] == "up") {
           this.moveUp("long")
         } else if (placedMove.classList[1] == "right") {
@@ -163,19 +163,7 @@ class Move {
         } else if (placedMove.classList[1] == "left") {
           this.moveLeft("long")
         }
-      })
-
-      /* for (let placedMove of this.placedMoves) {
-        if (placedMove.classList[1] == "up") {
-          this.moveUp("long")
-        } else if (placedMove.classList[1] == "right") {
-          this.moveRight("long")
-        } else if (placedMove.classList[1] == "down") {
-          this.moveDown("long")
-        } else if (placedMove.classList[1] == "left") {
-          this.moveLeft("long")
-        }
-      } */
+      }
     }
   }
 
