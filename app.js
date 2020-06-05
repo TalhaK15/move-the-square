@@ -136,53 +136,50 @@ class Move {
     }
   }
 
-  runTheCode(type) {
+  runTheCodeShort() {
     this.placedMoves = document.querySelectorAll(".movePlace > .moveButton")
     let squ = document.getElementById("square")
-    if (type == "short") {
-      console.log("short")
-      for (let placedMove of this.placedMoves) {
-        if (placedMove.classList[1] == "up") {
-          this.btm--
-        } else if (placedMove.classList[1] == "right") {
-          this.rgt--
-        } else if (placedMove.classList[1] == "down") {
-          this.btm++
-        } else if (placedMove.classList[1] == "left") {
-          this.rgt++
-        }
+
+    console.log("short")
+    for (let placedMove of this.placedMoves) {
+      if (placedMove.classList[1] == "up") {
+        this.btm--
+      } else if (placedMove.classList[1] == "right") {
+        this.rgt--
+      } else if (placedMove.classList[1] == "down") {
+        this.btm++
+      } else if (placedMove.classList[1] == "left") {
+        this.rgt++
       }
-      this.rgt *= 50
-      this.btm *= 50
-      this.moveInX()
-      this.moveInY()
-      this.rgt = 0
-      this.btm = 0
-      squ.addEventListener("transitionend", () => {
-        this.updatePos()
-      })
-      squ.addEventListener("webkitTransitionEnd", () => {
-        this.updatePos()
-      })
-      console.log(this.rgt, this.btm)
-    } else if (type == "long") {
-      console.log("long")
-      for (let placedMove of this.placedMoves) {
-        if (placedMove.classList[1] == "up") {
-          this.moveUp("long")
-        } else if (placedMove.classList[1] == "right") {
-          this.moveRight("long")
-        } else if (placedMove.classList[1] == "down") {
-          this.moveDown("long")
-        } else if (placedMove.classList[1] == "left") {
-          this.moveLeft("long")
-        }
-        squ.addEventListener("transitionend", () => {
-          this.updatePos()
-        })
-        squ.addEventListener("webkitTransitionEnd", () => {
-          this.updatePos()
-        })
+    }
+    this.rgt *= 50
+    this.btm *= 50
+    this.moveInX()
+    this.moveInY()
+    this.rgt = 0
+    this.btm = 0
+    squ.addEventListener("transitionend", () => {
+      this.updatePos()
+    })
+    squ.addEventListener("webkitTransitionEnd", () => {
+      this.updatePos()
+    })
+  }
+
+  runTheCodeLong() {
+    this.placedMoves = document.querySelectorAll(".movePlace > .moveButton")
+    let squ = document.getElementById("square")
+
+    console.log("long")
+    for (let placedMove of this.placedMoves) {
+      if (placedMove.classList[1] == "up") {
+        this.moveUp("long")
+      } else if (placedMove.classList[1] == "right") {
+        this.moveRight("long")
+      } else if (placedMove.classList[1] == "down") {
+        this.moveDown("long")
+      } else if (placedMove.classList[1] == "left") {
+        this.moveLeft("long")
       }
     }
   }
