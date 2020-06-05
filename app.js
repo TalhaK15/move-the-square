@@ -96,43 +96,48 @@ class Move {
   }
 
   moveInX() {
-    if (this.rgt < 0 && this.rgt >= -150) {
+    let canMoveRight = parseFloat(this.right) + 10 - parseFloat(this.right) * 2
+    let canMoveLeft = 360 - parseFloat(this.right)
+    if (this.rgt < 0 && this.rgt >= canMoveRight) {
       this.moveRight("short")
       this.showAlert(
         `Square moved ${this.rgt / -50} unit to the <b>right</b>`,
         "success"
       )
-    } else if (this.rgt > 0 && this.rgt <= 200) {
+    } else if (this.rgt > 0 && this.rgt <= canMoveLeft) {
       this.moveLeft("short")
       this.showAlert(
         `Square moved ${this.rgt / 50} unit to the <b>left</b>`,
         "success"
       )
-    } else if (this.rgt > 200 || this.rgt < -150) {
+    } else if (this.rgt > canMoveLeft || this.rgt < canMoveRight) {
       this.showAlert("You cant move out of the playground!", "danger")
     }
   }
 
   moveInY() {
-    if (this.btm < 0 && this.btm >= -150) {
+    let canMoveUp = parseFloat(this.top) + 10 - parseFloat(this.top) * 2
+    let canMoveDown = 360 - parseFloat(this.top)
+    if (this.btm < 0 && this.btm >= canMoveUp) {
       this.moveUp("short")
       this.showAlert(
         `Square moved ${this.btm / -50} unit to the <b>up</b>`,
         "success"
       )
-    } else if (this.btm > 0 && this.btm <= 200) {
+    } else if (this.btm > 0 && this.btm <= canMoveDown) {
       this.moveDown("short")
       this.showAlert(
         `Square moved ${this.btm / 50} unit to the <b>down</b>`,
         "success"
       )
-    } else if (this.btm > 200 || this.btm < -150) {
+    } else if (this.btm > canMoveDown || this.btm < canMoveUp) {
       this.showAlert("You cant move out of the playground!", "danger")
     }
   }
 
   runTheCode(type) {
     this.placedMoves = document.querySelectorAll(".movePlace > .moveButton")
+    let squ = document.getElementById("square")
     if (type == "short") {
       console.log("short")
       for (let placedMove of this.placedMoves) {
@@ -151,13 +156,26 @@ class Move {
       console.log(this.rgt, this.btm)
       this.moveInX()
       this.moveInY()
-      this.updatePos()
+      squ.addEventListener("transitionend", function () {
+        this.updatePos()
+      })
+      squ.addEventListener("webkitTransitionEnd", function () {
+        this.updatePos()
+      })
     } else if (type == "long") {
       console.log("long")
       for (let placedMove of this.placedMoves) {
         if (placedMove.classList[1] == "up") {
           this.moveUp("long")
           this.updatePos()
+          /* squ.addEventListener("transitionend", function () {
+            this.updatePos()
+            continue
+          })
+          squ.addEventListener("webkitTransitionEnd", function () {
+            this.updatePos()
+            continue
+          }) */
         } else if (placedMove.classList[1] == "right") {
           this.moveRight("long")
           this.updatePos()
