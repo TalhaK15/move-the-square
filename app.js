@@ -98,6 +98,7 @@ class Move {
   moveInX() {
     let canMoveRight = parseFloat(this.right) + 10 - parseFloat(this.right) * 2
     let canMoveLeft = 360 - parseFloat(this.right)
+    console.log(canMoveRight, canMoveLeft)
     if (this.rgt < 0 && this.rgt >= canMoveRight) {
       this.moveRight("short")
       this.showAlert(
@@ -153,39 +154,35 @@ class Move {
       }
       this.rgt *= 50
       this.btm *= 50
-      console.log(this.rgt, this.btm)
       this.moveInX()
       this.moveInY()
-      squ.addEventListener("transitionend", function () {
+      this.rgt = 0
+      this.btm = 0
+      squ.addEventListener("transitionend", () => {
         this.updatePos()
       })
-      squ.addEventListener("webkitTransitionEnd", function () {
+      squ.addEventListener("webkitTransitionEnd", () => {
         this.updatePos()
       })
+      console.log(this.rgt, this.btm)
     } else if (type == "long") {
       console.log("long")
       for (let placedMove of this.placedMoves) {
         if (placedMove.classList[1] == "up") {
           this.moveUp("long")
-          this.updatePos()
-          /* squ.addEventListener("transitionend", function () {
-            this.updatePos()
-            continue
-          })
-          squ.addEventListener("webkitTransitionEnd", function () {
-            this.updatePos()
-            continue
-          }) */
         } else if (placedMove.classList[1] == "right") {
           this.moveRight("long")
-          this.updatePos()
         } else if (placedMove.classList[1] == "down") {
           this.moveDown("long")
-          this.updatePos()
         } else if (placedMove.classList[1] == "left") {
           this.moveLeft("long")
-          this.updatePos()
         }
+        squ.addEventListener("transitionend", () => {
+          this.updatePos()
+        })
+        squ.addEventListener("webkitTransitionEnd", () => {
+          this.updatePos()
+        })
       }
     }
   }
@@ -196,8 +193,6 @@ class Move {
     this.top = $(`#${this.elementName}`).css("top")
     this.right = $(`#${this.elementName}`).css("right")
     this.all
-    this.rgt = 0
-    this.btm = 0
     this.array = []
   }
 }

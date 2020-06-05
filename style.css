@@ -13,8 +13,8 @@
   width: 30px;
   height: 30px;
   position: absolute;
-  top: 360px;
-  right: 110px;
+  top: 110px;
+  right: 260px;
   transition: all 500ms linear;
   background-color: red;
 }
