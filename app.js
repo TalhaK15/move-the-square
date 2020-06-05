@@ -8,6 +8,7 @@ class Move {
     this.btm = 0
     this.placedMoves
     this.array = []
+    this.num = 0
   }
 
   makeNumber() {
@@ -140,7 +141,6 @@ class Move {
     this.placedMoves = document.querySelectorAll(".movePlace > .moveButton")
     let squ = document.getElementById("square")
 
-    console.log("short")
     for (let placedMove of this.placedMoves) {
       if (placedMove.classList[1] == "up") {
         this.btm--
@@ -170,18 +170,29 @@ class Move {
     this.placedMoves = document.querySelectorAll(".movePlace > .moveButton")
     let squ = document.getElementById("square")
 
-    console.log("long")
-    for (let placedMove of this.placedMoves) {
-      if (placedMove.classList[1] == "up") {
+    setTimeout(() => {
+      if (this.placedMoves[this.num].classList[1] == "up") {
         this.moveUp("long")
-      } else if (placedMove.classList[1] == "right") {
+      } else if (this.placedMoves[this.num].classList[1] == "right") {
         this.moveRight("long")
-      } else if (placedMove.classList[1] == "down") {
+      } else if (this.placedMoves[this.num].classList[1] == "down") {
         this.moveDown("long")
-      } else if (placedMove.classList[1] == "left") {
+      } else if (this.placedMoves[this.num].classList[1] == "left") {
         this.moveLeft("long")
       }
-    }
+      this.num++
+      squ.addEventListener("transitionend", () => {
+        this.updatePos()
+      })
+      squ.addEventListener("webkitTransitionEnd", () => {
+        this.updatePos()
+      })
+      if (this.num < this.placedMoves.length) {
+        this.runTheCodeLong()
+      } else {
+        this.num = 0
+      }
+    }, 1050)
   }
 
   clearLog() {}
@@ -199,11 +210,11 @@ let runButtonShort = document.querySelector(".runShort")
 let runButtonLong = document.querySelector(".runLong")
 
 function runShort() {
-  square.runTheCode("short")
+  square.runTheCodeShort()
 }
 
 function runLong() {
-  square.runTheCode("long")
+  square.runTheCodeLong()
 }
 
 /* $(document).ready(function () {
