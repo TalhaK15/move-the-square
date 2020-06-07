@@ -194,8 +194,6 @@ class Move {
     }, 1050)
   }
 
-  clearLog() {}
-
   updatePos() {
     this.top = $(`#${this.elementName}`).css("top")
     this.right = $(`#${this.elementName}`).css("right")
@@ -216,6 +214,13 @@ function runLong() {
 
 function remove(element) {
   element.remove()
+}
+
+function clearLog(element) {
+  let logs = document.querySelectorAll(".success, .danger")
+  logs.forEach((log) => {
+    log.remove()
+  })
 }
 
 // Drag n Drop

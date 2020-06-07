@@ -92,4 +92,5 @@ body {
   text-transform: uppercase;
   font-weight: 700;
   background: salmon;
+  outline: none;
 }
