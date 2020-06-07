@@ -99,7 +99,6 @@ class Move {
   moveInX() {
     let canMoveRight = parseFloat(this.right) + 10 - parseFloat(this.right) * 2
     let canMoveLeft = 360 - parseFloat(this.right)
-    console.log(canMoveRight, canMoveLeft)
     if (this.rgt < 0 && this.rgt >= canMoveRight) {
       this.moveRight("short")
       this.showAlert(
@@ -206,8 +205,6 @@ class Move {
 }
 
 let square = new Move("square")
-let runButtonShort = document.querySelector(".runShort")
-let runButtonLong = document.querySelector(".runLong")
 
 function runShort() {
   square.runTheCodeShort()
@@ -217,34 +214,15 @@ function runLong() {
   square.runTheCodeLong()
 }
 
-/* $(document).ready(function () {
-  $(".run").click(function () {
-    square.runTheCode()
-    square = new Move("square")
-  })
-  $(".right").click(function () {
-    a.moveRight()
-    a = new Move("square")
-  })
-  $(".left").click(function () {
-    a.moveLeft()
-    a = new Move("square")
-  })
-  $(".up").click(function () {
-    a.moveUp()
-    a = new Move("square")
-  })
-  $(".down").click(function () {
-    a.moveDown()
-    a = new Move("square")
-  })
-}) */
+function remove(element) {
+  element.remove()
+}
 
 // Drag n Drop
 const moves = document.querySelectorAll(".moveButton")
 const places = document.querySelectorAll(".movePlace")
-const homes = document.querySelectorAll(".moveHome")
 let selectedMove = null
+let copyMove = null
 
 //Loop Through Move Buttons
 for (let move of moves) {
@@ -258,29 +236,27 @@ for (let move of moves) {
     place.addEventListener("dragleave", dragLeave)
     place.addEventListener("drop", dragDrop)
   }
-  //Loop Through Homes
-  for (let home of homes) {
-    home.addEventListener("dragenter", dragEnterH)
-    home.addEventListener("dragover", dragOverH)
-    home.addEventListener("dragleave", dragLeaveH)
-    home.addEventListener("drop", dragDropH)
-  }
 }
 
 //Drag Functions
 function dragStart() {
   selectedMove = this
-  this.classList.add("dragMove")
+  copyMove = selectedMove.cloneNode(true)
+  copyMove.classList.add("dragMove")
   setTimeout(() => {
-    this.classList.add("selectedMove")
-    this.classList.remove("dragMove")
+    copyMove.classList.add("selectedMove")
+    copyMove.classList.remove("dragMove")
   }, 0)
 }
 
 function dragEnd() {
-  setTimeout(() => (selectedMove = null), 0)
-  this.classList.add("noMargin", "moveButton")
-  this.classList.remove("selectedMove")
+  setTimeout(() => {
+    selectedMove = null
+    copyMove = null
+  }, 0)
+  copyMove.classList.add("noMargin", "moveButton")
+  copyMove.classList.remove("selectedMove")
+  copyMove.setAttribute("onclick", "remove(this)")
 }
 
 function dragOver(e) {
@@ -298,19 +274,5 @@ function dragLeave() {
 
 function dragDrop() {
   this.classList.remove("hovered")
-  this.append(selectedMove)
-}
-//---------------------------------------
-function dragOverH(e) {
-  e.preventDefault()
-}
-
-function dragEnterH(e) {
-  e.preventDefault()
-}
-
-function dragLeaveH() {}
-
-function dragDropH() {
-  this.append(selectedMove)
+  this.append(copyMove)
 }
