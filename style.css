@@ -93,4 +93,5 @@ body {
   font-weight: 700;
   background: salmon;
   outline: none;
+  cursor: pointer;
 }
